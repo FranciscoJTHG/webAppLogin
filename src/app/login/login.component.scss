@@ -1,0 +1,86 @@
+
+div.login {
+    overflow: hidden;
+    height: 672px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: #36D1DC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    .custom-form {
+        width: 15%;
+        margin: 15% auto;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 2rem 3rem;
+        border-radius: 2.5rem;
+        background-color: #ecf0f3;
+        box-shadow: 13px 13px 20px #3f51b5, -13px -13px 20px #3f51b5;
+        color: black;
+        overflow: hidden;
+
+        input {
+            display: block;
+            width: 100%;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            border: none;
+            box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8),
+                inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+            border: 0 none;
+            background: #ebf5fc;
+            font-size: 15px;
+        }
+
+        button {
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border: none;
+            font-size: 0.875rem;
+            color: #ffffff;
+            font-weight: bold;
+            margin: 1rem 0 0 3rem;
+            display: block;
+            border-radius: 1.5rem;
+            box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #ffffff;
+            cursor: pointer;
+        }
+
+        mat-error {
+            font-size: .8rem;
+        }
+    }
+
+    div.alert-danger {
+        color: #721c24;
+        background: #f8d7da;
+        border-color: #f5c6cb;
+        margin: auto;
+        width: 15%;
+        position: relative;
+        bottom: 180px;
+        text-align: center;
+        border-radius: 1rem;
+
+        span {
+            margin-left: 10px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 20px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            right: 10px;
+        }
+
+        span:hover {
+            color: black;
+        }
+
+        div {
+            padding: 20px;
+        }
+    }
+}
+
