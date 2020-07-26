@@ -1,7 +1,8 @@
 <div [class]="'login'">
     <form [class]="'custom-form'" (ngSubmit)="onSubmit()" [formGroup]="formLogin" novalidate>
+        <img [src]="'assets/img/login1.png'" alt="login">
         <mat-form-field appearance="legacy">
-            <mat-label>Correo</mat-label>
+            <mat-label>Email</mat-label>
             <input matInput type="email" name="email" formControlName="email" placeholder="pat@example.com" />
             <mat-error>{{ getError('email') }}</mat-error>
         </mat-form-field>
@@ -13,13 +14,13 @@
         </mat-form-field>
         <br>
         <button mat-raised-button color="primary" [disabled]="formLogin.invalid">
-            Ingresar
+            Login
         </button>
     </form>
-    <div [ngClass]="'alert-danger'" *ngIf="errorMessage">
+    <!-- <div [ngClass]="'alert-danger'" *ngIf="errorMessage">
         <span #span (click)="ocultar(span, 'none')" >&times;</span>
         <div>
             {{ errorMessage }}
         </div>
-    </div>
+    </div> -->
 </div>

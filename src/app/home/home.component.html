@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
     <span>My Application</span>
-    <button style="position: absolute; right: 2rem;" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="logout()">
+    <p [ngStyle]="{'margin': 'auto', 'text-align': 'center'}">Usuario: {{ user }}</p>
+    <button [ngStyle]="{'position': 'absolute', 'right': '2rem'}" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="logout()">
         <mat-icon>login</mat-icon>
     </button>
 </mat-toolbar>

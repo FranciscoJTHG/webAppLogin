@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from './material.module';
 
 import { LoginModule } from './login/login.module';
+import { DialogMatModule } from './dialog-mat/dialog-mat.module';
 
 @NgModule({
     declarations: [

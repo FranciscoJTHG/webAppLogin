@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
 
     @ViewChild(MatSort, { static: true }) sort: MatSort;
 
+    user = this.tokenStoreService.getToken().user;
+
     ngOnInit() {
         this.listado();
     }
@@ -33,18 +35,16 @@ export class HomeComponent implements OnInit {
         const token = listElement.token;
         const email = listElement.email;
         const app = 'APP_BCK';
+        const user = listElement.user;
 
         this.tokenStoreService.obtenerListado(email, token, app).subscribe(data => {
             this.displayedColumns = ['bookingId', 'tutenUserClient', 'bookingTime', 'locationId', 'bookingPrice'];
             this.dataSource = new MatTableDataSource(data);
             this.sort.sort({ id: 'bookingId', start: 'asc', disableClear: false });
             this.dataSource.sort = this.sort;
-            console.log(data);
-
         },
             err => {
                 console.log(err);
-
             });
     }
 

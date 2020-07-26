@@ -3,6 +3,12 @@ import { AbstractControl, FormGroup, FormBuilder, Validators, ValidationErrors }
 import { LoginService } from '../services/login.service';
 import { TokenStoreService } from '../services/token-store.service';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogMatComponent } from '../dialog-mat/dialog-mat.component';
+
+interface errorMessage {
+    errorMessage: string;
+}
 
 @Component({
     selector: 'app-login',
@@ -11,20 +17,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-    /* email: string;
-    password: string; */
     errorMessage: string;
 
     public formLogin: FormGroup;
 
-    constructor( private formBuilder: FormBuilder, public loginService: LoginService, public tokenStoreService: TokenStoreService, public router: Router ) { }
+    constructor( private formBuilder: FormBuilder, public loginService: LoginService, public tokenStoreService: TokenStoreService, public router: Router, private  dialog:  MatDialog ) { }
 
     public ngOnInit () {
         this.buildForm();
     }
 
     private buildForm () {
-        // const emailPattern: any = '/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i';
+
         const minPassLength = 4;
 
         this.formLogin = this.formBuilder.group({
@@ -35,24 +39,9 @@ export class LoginComponent implements OnInit {
             password: ['', [
                 Validators.required,
                 Validators.minLength(minPassLength),
-                // this.validatePassword
             ]]
         });
     }
-
-    /* private validatePassword(control: AbstractControl): ValidationErrors | null {
-        const password = control.value;
-        let error = null;
-
-        if (!password.includes('$')) {
-            error = { ...error, dollar: 'needs a dollar symbol' };
-        }
-
-        if (!parseFloat(password[0])) {
-            error = { ...error, number: 'must start with a number' };
-        }
-        return error;
-    } */
 
     public getError(controlName: string): ValidationErrors | null {
 
@@ -62,9 +51,9 @@ export class LoginComponent implements OnInit {
         if ( control.touched && control.errors != null ) {
 
             if (control.errors.required && controlName == 'email') {
-                error = 'El correo electronido es requerido';
+                error = 'El email electronido es requerido';
             } else if (control.errors.email) {
-                error = 'El correo es invalido';
+                error = 'El email es invalido';
             }
 
             if (control.errors.required && controlName == 'password') {
@@ -77,15 +66,6 @@ export class LoginComponent implements OnInit {
         return error;
     }
 
-    /* login (user: object) {
-        const user = {email: this.email, password: this.password};
-        this.loginService.login(user).subscribe( data  => {
-            console.log(data);
-            https://la.spankbang.com/
-
-        })
-    } */
-
     public onSubmit () {
         if (this.formLogin.valid) {
             const user = this.formLogin.value;
@@ -96,14 +76,20 @@ export class LoginComponent implements OnInit {
                 this.router.navigateByUrl('/home');
             },
             err => {
-                console.error('')
+
                 this.errorMessage = err.error;
-                // this.reloadPage(1000);
-                // this.formLogin.reset();
+                this.openDialog(this.errorMessage);
             });
-        } else {
-            alert('Invalid');
         }
+    }
+
+    openDialog(error): void {
+
+        this.dialog.open(DialogMatComponent, {
+            data: {
+                errorMessage: error
+            }
+        });
     }
 
     public reloadPage(time) {
@@ -111,11 +97,4 @@ export class LoginComponent implements OnInit {
             window.location.reload();
         }, time);
     }
-
-    public ocultar (span, property) {
-        // onclick="this.parentElement.style.display='none';"
-        span.parentElement.style.display = property;
-        // this.reloadPage(1000);
-    }
-
 }
